@@ -39,16 +39,17 @@ class Mahasiswa extends RestController
 				'message' => 'Please provide an id!'
 			], 400);
 		} else {
-			if ($this->mahasiswa->delete_by_id($id) > 0) {
-				$this->response([
-					'status' => true,
-					'message' => "Data $id Deleted"
-				], 204);
-			} else {
+			if ($this->mahasiswa->delete_by_id($id) == 0) {
 				$this->response([
 					'status' => false,
 					'message' => "Data By id = $id not Found!"
 				], 400);
+				
+			} else {
+				$this->response([
+					'status' => true,
+					'message' => "Data $id Deleted"
+				], 200);
 			}
 		}
 	}
