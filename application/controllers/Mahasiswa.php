@@ -10,6 +10,10 @@ class Mahasiswa extends RestController
 	{
 		parent::__construct();
 		$this->load->model('Mahasiswa_model', 'mahasiswa');
+		$this->methods['index_get']['limit']    = 60;
+		$this->methods['index_post']['limit']   = 60;
+		$this->methods['index_put']['limit']    = 60;
+		$this->methods['index_delete']['limit'] = 60;
 	}
 
 	public function index_get()
@@ -44,7 +48,6 @@ class Mahasiswa extends RestController
 					'status' => false,
 					'message' => "Data By id = $id not Found!"
 				], 400);
-				
 			} else {
 				$this->response([
 					'status' => true,
@@ -63,13 +66,12 @@ class Mahasiswa extends RestController
 			'jurusan' => $this->post('jurusan')
 		];
 
-		if($this->mahasiswa->create_data($data) > 0)
-		{
+		if ($this->mahasiswa->create_data($data) > 0) {
 			$this->response([
 				'status' => true,
 				'message' => "New Mahasiswa Has been created"
 			], 201);
-		}else{
+		} else {
 			$this->response([
 				'status' => false,
 				'message' => 'You\'ve sent bad data!'
@@ -86,13 +88,12 @@ class Mahasiswa extends RestController
 			'jurusan' => $this->put('jurusan')
 		];
 
-		if($this->mahasiswa->update_data($data,$this->put('id')) > 0)
-		{
+		if ($this->mahasiswa->update_data($data, $this->put('id')) > 0) {
 			$this->response([
 				'status' => true,
 				'message' => "Data Has Been Updated"
 			], 201);
-		}else{
+		} else {
 			$this->response([
 				'status' => false,
 				'message' => 'You\'ve sent bad data!'
