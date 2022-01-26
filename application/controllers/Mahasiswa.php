@@ -53,4 +53,50 @@ class Mahasiswa extends RestController
 			}
 		}
 	}
+
+	public function index_post()
+	{
+		$data = [
+			'nrp' => $this->post('nrp'),
+			'nama' => $this->post('nama'),
+			'email' => $this->post('email'),
+			'jurusan' => $this->post('jurusan')
+		];
+
+		if($this->mahasiswa->create_data($data) > 0)
+		{
+			$this->response([
+				'status' => true,
+				'message' => "New Mahasiswa Has been created"
+			], 201);
+		}else{
+			$this->response([
+				'status' => false,
+				'message' => 'You\'ve sent bad data!'
+			], 400);
+		}
+	}
+
+	public function index_put()
+	{
+		$data = [
+			'nrp' => $this->put('nrp'),
+			'nama' => $this->put('nama'),
+			'email' => $this->put('email'),
+			'jurusan' => $this->put('jurusan')
+		];
+
+		if($this->mahasiswa->update_data($data,$this->put('id')) > 0)
+		{
+			$this->response([
+				'status' => true,
+				'message' => "Data Has Been Updated"
+			], 201);
+		}else{
+			$this->response([
+				'status' => false,
+				'message' => 'You\'ve sent bad data!'
+			], 400);
+		}
+	}
 }

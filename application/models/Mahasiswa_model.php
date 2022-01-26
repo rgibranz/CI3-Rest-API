@@ -17,4 +17,17 @@ class Mahasiswa_model extends CI_Model
 		$this->db->delete('mahasiswa', ['id' => $id]);
 		return $this->db->affected_rows();
 	}
+
+	public function create_data($data)
+	{
+		$this->db->insert('mahasiswa',$data);
+		return $this->db->affected_rows();
+	}
+
+	public function update_data($data,$id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('mahasiswa',$data);
+		return $this->db->affected_rows();
+	}
 }
